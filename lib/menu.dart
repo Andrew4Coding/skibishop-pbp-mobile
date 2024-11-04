@@ -1,62 +1,71 @@
 import 'package:flutter/material.dart';
+import 'package:skibishop_mobile/ds/bottomnav.dart';
 
-class MyHomePage extends StatelessWidget {
-  final String npm = '5000000000'; // NPM
-  final String name = 'Andrew Devito Aryo'; // Nama
-  final String className = 'PBP F'; // Kelas
+class MyHomePage extends StatefulWidget {
+  const MyHomePage({super.key});
 
-  final List<ItemHomepage> items = [
-    ItemHomepage("Lihat Daftar Product", Icons.menu),
-    ItemHomepage("Tambah Product", Icons.add),
-    ItemHomepage("Logout", Icons.logout),
+  @override
+  State<MyHomePage> createState() => _MyHomePageState();
+}
+
+class _MyHomePageState extends State<MyHomePage> {
+  final String npm = '2306152494';
+  // NPM
+  final String name = 'Andrew Devito Aryo';
+  // Nama
+  final String className = 'PBP F';
+  // Kelas
+  final items = [
+    ItemHomepage('Products', Icons.shopping_bag),
+    ItemHomepage('Add Product', Icons.add),
+    ItemHomepage('Logout', Icons.logout),
   ];
-
-  MyHomePage({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text(
-          'Skibishop',
-          style: TextStyle(
-            color: Colors.white,
-            fontWeight: FontWeight.bold,
+        title: const Padding(
+          padding: EdgeInsets.symmetric(horizontal: 20.0),
+          child: Text(
+            'Skibishop',
+            style: TextStyle(
+                color: Colors.white,
+                fontWeight: FontWeight.bold,
+                fontSize: 18.0),
           ),
         ),
         backgroundColor: Theme.of(context).colorScheme.primary,
       ),
       body: Padding(
-        padding: const EdgeInsets.all(16.0),
+        padding: const EdgeInsets.all(32.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                InfoCard(title: 'NPM', content: npm),
-                InfoCard(title: 'Name', content: name),
-                InfoCard(title: 'Class', content: className),
-              ],
-            ),
-            const SizedBox(height: 16.0),
-            const Center(
-              child: Padding(
-                padding: EdgeInsets.only(top: 16.0),
-                child: Text(
-                  'Welcome to Skibishop',
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 18.0,
-                  ),
-                ),
+            const Text(
+              'Hello, Andrew!',
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 18.0,
               ),
             ),
             const SizedBox(height: 16.0),
             Expanded(
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  Expanded(child: InfoCard(title: 'NPM', content: npm)),
+                  Expanded(child: InfoCard(title: 'Name', content: name)),
+                  Expanded(child: InfoCard(title: 'Class', content: className)),
+                ],
+              ),
+            ),
+            const SizedBox(height: 16.0),
+            Expanded(
+              flex: 3,
               child: GridView.count(
                 primary: false,
-                padding: const EdgeInsets.all(20),
                 crossAxisSpacing: 10,
                 mainAxisSpacing: 10,
                 crossAxisCount: 2,
@@ -68,6 +77,7 @@ class MyHomePage extends StatelessWidget {
           ],
         ),
       ),
+      bottomNavigationBar: const BottomNavbar(),
     );
   }
 }
@@ -81,7 +91,6 @@ class InfoCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      elevation: 4.0,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(10),
       ),
@@ -92,10 +101,16 @@ class InfoCard extends StatelessWidget {
           children: [
             Text(
               title,
-              style: const TextStyle(fontWeight: FontWeight.bold),
+              style: const TextStyle(
+                fontWeight: FontWeight.bold,
+              ),
             ),
             const SizedBox(height: 8.0),
-            Text(content),
+            Text(
+              content,
+              textAlign: TextAlign.center,
+              style: const TextStyle(fontSize: 12),
+            ),
           ],
         ),
       ),
