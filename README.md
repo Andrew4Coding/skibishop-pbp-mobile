@@ -49,3 +49,109 @@ Pada proyek ini, beberapa widget yang digunakan beserta fungsinya adalah:
 - **npm, name, className**: Jika ada perubahan pada data pengguna (NPM, nama, kelas), `setState()` memungkinkan pembaruan data ini ditampilkan langsung di UI.
 
 Dengan menggunakan `setState()`, aplikasi akan menyesuaikan tampilan sesuai dengan data terbaru yang ada pada variabel-variabel tersebut.
+
+
+Berikut format README.md yang lebih rapi:
+
+---
+
+## Langkah-Langkah Implementasi Checklist
+### Membuat Program Flutter Baru Bertema E-Commerce
+1. **Inisiasi Flutter Project melalui VS Code:**
+   ![image](https://github.com/user-attachments/assets/737a2748-70a3-4444-b440-636550c068dd)
+2. **Membuat Flutter Project dengan nama `skibishop-mobile`.**
+3. **Masuk ke codebase.**
+4. **Membuat `main.dart` sebagai layout utama** dan `menu.dart` untuk menyimpan menu-menu yang akan ditampilkan di halaman utama.
+5. **Menjalankan aplikasi** dengan perintah berikut:
+   ```bash
+   flutter run
+   ```
+
+### Membuat Tiga Tombol Sederhana dengan Ikon dan Teks
+1. **Membuat widget `ItemHomepage` dan `ItemCard`** yang akan digunakan secara modular untuk menampilkan tombol.
+   ```dart
+   class ItemHomepage {
+     final String name;
+     final IconData icon;
+     final Color color;
+
+     ItemHomepage(this.name, this.icon, this.color);
+   }
+
+   class ItemCard extends StatelessWidget {
+     final ItemHomepage item;
+
+     const ItemCard(this.item, {super.key});
+
+     @override
+     Widget build(BuildContext context) {
+       return Material(
+         color: Theme.of(context).colorScheme.secondary,
+         ...
+       );
+     }
+   }
+   ```
+
+2. **Membuat array `items`:**
+   ```dart
+   final items = [
+     ItemHomepage('Products', Icons.shopping_bag, Colors.blue),
+     ItemHomepage('Add Product', Icons.add, Colors.green),
+     ItemHomepage('Logout', Icons.logout, Colors.red),
+   ];
+   ```
+
+3. **Memanggil komponen `ItemHomePage` di widget utama `HomePage`:**
+   ```dart
+   ...
+   Expanded(
+     flex: 3,
+     child: GridView.count(
+       primary: false,
+       crossAxisSpacing: 10,
+       mainAxisSpacing: 10,
+       crossAxisCount: 2,
+       children: items.map((ItemHomepage item) {
+         return ItemCard(item);
+       }).toList(),
+     ),
+   ),
+   ...
+   ```
+
+### Mengimplementasikan Warna-Warna Berbeda untuk Setiap Tombol (Lihat Daftar Produk, Tambah Produk, dan Logout)
+1. **Inisiasi warna berbeda untuk setiap tombol:**
+   ```dart
+   final items = [
+     ItemHomepage('Products', Icons.shopping_bag, Colors.blue),
+     ItemHomepage('Add Product', Icons.add, Colors.green),
+     ItemHomepage('Logout', Icons.logout, Colors.red),
+   ];
+   ```
+   
+2. **Menggunakan warna pada `ItemCard`:**
+   ```dart
+   ...
+   @override
+   Widget build(BuildContext context) {
+     return Material(
+       color: item.color,
+       ...
+     );
+   }
+   ```
+
+### Menampilkan Snackbar dengan Pesan
+Menambahkan logika `onTap` pada masing-masing `ItemCard` untuk menampilkan pesan snackbar.
+
+```dart
+onTap: () {
+  ScaffoldMessenger.of(context)
+    ..hideCurrentSnackBar()
+    ..showSnackBar(SnackBar(
+        content: Text("Kamu telah menekan tombol ${item.name}!")));
+},
+```
+
+Pesan snackbar yang muncul akan otomatis mengikuti nama item yang diberikan.
