@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:skibishop_mobile/ds/bottomnav.dart';
+import 'package:skibishop_mobile/ds/left_drawer.dart';
+import 'package:skibishop_mobile/pages/productEntryFormPage.dart';
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key});
@@ -16,9 +18,9 @@ class _MyHomePageState extends State<MyHomePage> {
   final String className = 'PBP F';
   // Kelas
   final items = [
-    ItemHomepage('Products', Icons.shopping_bag),
-    ItemHomepage('Add Product', Icons.add),
-    ItemHomepage('Logout', Icons.logout),
+    ItemHomepage('Products', Icons.shopping_bag, Colors.blue),
+    ItemHomepage('Add Product', Icons.add, Colors.green),
+    ItemHomepage('Logout', Icons.logout, Colors.red),
   ];
 
   @override
@@ -37,6 +39,7 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
         backgroundColor: Theme.of(context).colorScheme.primary,
       ),
+      drawer: const LeftDrawer(),
       body: Padding(
         padding: const EdgeInsets.all(32.0),
         child: Column(
@@ -121,8 +124,9 @@ class InfoCard extends StatelessWidget {
 class ItemHomepage {
   final String name;
   final IconData icon;
+  final Color color;
 
-  ItemHomepage(this.name, this.icon);
+  ItemHomepage(this.name, this.icon, this.color);
 }
 
 class ItemCard extends StatelessWidget {
@@ -133,7 +137,7 @@ class ItemCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Material(
-      color: Theme.of(context).colorScheme.secondary,
+      color: item.color,
       borderRadius: BorderRadius.circular(10),
       child: InkWell(
         onTap: () {
@@ -141,6 +145,13 @@ class ItemCard extends StatelessWidget {
             ..hideCurrentSnackBar()
             ..showSnackBar(SnackBar(
                 content: Text("Kamu telah menekan tombol ${item.name}!")));
+
+          if (item.name == "Add Product") {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => const ProductEntryFormPage()));
+          }
         },
         child: Container(
           padding: const EdgeInsets.all(16),
