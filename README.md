@@ -50,11 +50,6 @@ Pada proyek ini, beberapa widget yang digunakan beserta fungsinya adalah:
 
 Dengan menggunakan `setState()`, aplikasi akan menyesuaikan tampilan sesuai dengan data terbaru yang ada pada variabel-variabel tersebut.
 
-
-Berikut format README.md yang lebih rapi:
-
----
-
 ## Langkah-Langkah Implementasi Checklist
 ### Membuat Program Flutter Baru Bertema E-Commerce
 1. **Inisiasi Flutter Project melalui VS Code:**
