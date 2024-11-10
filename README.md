@@ -14,37 +14,48 @@ E-Commerce Mobile Application for True Sigma
 - [Tugas 7 PBP 2024/2025](https://github.com/Andrew4Coding/skibishop-pbp-mobile/wiki/Tugas-7-PBP-2024-2025)
 
 # Tugas 8 - PBP 2024/2025
-## 1. Kegunaan `const` di Flutter
+## 1. Jelaskan Kegunaan `const` di Flutter, Keuntungan Menggunakan `const`, Kapan Menggunakan `const`, dan Kapan Tidak Menggunakan `const`
 
 `const` di Flutter digunakan untuk mendeklarasikan objek yang nilainya tidak berubah selama aplikasi berjalan. Ketika sebuah widget diberi label `const`, Flutter mengoptimalkan penggunaan memori dan performa, karena objek tersebut akan dibuat hanya sekali dan digunakan kembali.
 
-### Keuntungan Menggunakan `const`
+Keuntungan memakai `const` yaitu:
 - **Efisiensi Memori**: Objek yang diberi `const` hanya akan diciptakan sekali dan dapat digunakan berulang kali tanpa alokasi memori ulang.
 - **Peningkatan Performa**: Menghindari pembuatan ulang widget yang sama, sehingga mempercepat proses rendering dan meningkatkan performa.
 - **Konsistensi**: Memastikan nilai tetap konsisten selama aplikasi berjalan.
 
-### Kapan Menggunakan `const`
-- Gunakan `const` pada widget yang tidak mengalami perubahan dinamis, seperti teks statis, gambar statis, atau layout yang tidak berubah.
-
-### Kapan Tidak Menggunakan `const`
-- Hindari penggunaan `const` pada widget yang mengandung data yang dapat berubah, seperti input pengguna, hasil API, atau data yang berubah sesuai kondisi.
+Gunakan `const` pada widget yang tidak akan mengalami perubahan, misalnya Text static, gambar static, atau layout yang tidak berubah. Namun hindari penggunaan `const` pada widget yang mengandung data yang dapat berubah, seperti input pengguna, hasil API, atau Widget yang mengandung state.
 
 ---
 
 ## 2. Perbandingan Penggunaan `Column` dan `Row` di Flutter
 ### `Column`
 - **Fungsi**: Menyusun widget secara vertikal (atas ke bawah).
-- **Kegunaan**: Digunakan untuk menata widget yang harus ditampilkan dalam urutan vertikal, seperti form, daftar, atau tombol yang diletakkan secara vertikal.
+- **Kegunaan**: Digunakan untuk menata widget yang harus ditampilkan dalam urutan vertikal
 - **Contoh Implementasi**:
   ```dart
-  Column(
+  child: Column(
+    mainAxisAlignment: MainAxisAlignment.center,
     children: [
-      Text('Nama'),
-      TextField(),
-      Text('Email'),
-      TextField(),
+      Text(
+        item.count.toString(),
+        style: const TextStyle(
+          color: Colors.white,
+          fontWeight: FontWeight.bold,
+        ),
+      ),
+      Icon(
+        item.icon,
+        color: Colors.white,
+        size: 30.0,
+      ),
+      const SizedBox(height: 8.0),
+      Text(
+        item.name,
+        textAlign: TextAlign.center,
+        style: const TextStyle(color: Colors.white),
+      ),
     ],
-  );
+    ),
   ```
 
 ### `Row`
