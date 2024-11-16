@@ -10,143 +10,119 @@ E-Commerce Mobile Application for True Sigma
 - **Styling**: Material App & Cupertino
 - **Font**: DM Sans, Catemaran
 
-## Tugas 7 - PBP 2024/2025
-### 1. Jelaskan apa yang dimaksud dengan stateless widget dan stateful widget, dan jelaskan perbedaan dari keduanya.
+## 📚 Archive Tugas 
+- [Tugas 7 PBP 2024/2025](https://github.com/Andrew4Coding/skibishop-pbp-mobile/wiki/Tugas-7-PBP-2024-2025)
 
-**Stateless Widget** adalah widget yang bersifat statis dan tidak memiliki state atau keadaan yang berubah. `StatelessWidget` hanya dibangun sekali ketika di-render dan tidak akan berubah selama aplikasi berjalan. Contohnya, widget seperti `Text`, `Icon`, atau `Container`, yang tidak memerlukan interaksi atau perubahan data.
+# Tugas 8 - PBP 2024/2025
+## 1. Apa kegunaan const di Flutter? Jelaskan apa keuntungan ketika menggunakan const pada kode Flutter. Kapan sebaiknya kita menggunakan const, dan kapan sebaiknya tidak digunakan?
 
-**Stateful Widget** adalah widget yang memiliki state atau keadaan yang dapat berubah. `StatefulWidget` dibangun ulang setiap kali terjadi perubahan pada state-nya menggunakan fungsi `setState()`. Widget ini cocok untuk komponen yang membutuhkan perubahan tampilan karena interaksi pengguna atau perubahan data, seperti `TextField`, `Checkbox`, atau `Slider`.
+`const` di Flutter digunakan untuk mendeklarasikan objek yang nilainya tidak berubah selama aplikasi berjalan. Ketika sebuah widget diberi label `const`, Flutter mengoptimalkan penggunaan memori dan performa, karena objek tersebut akan dibuat hanya sekali dan digunakan kembali.
 
-**Perbedaan utama**:
-- **StatelessWidget** tidak memiliki state dan bersifat statis, sedangkan **StatefulWidget** memiliki state yang dapat berubah selama runtime.
-- **StatelessWidget** cocok untuk tampilan yang tidak memerlukan pembaruan dinamis, sementara **StatefulWidget** cocok untuk tampilan yang perlu menyesuaikan diri dengan perubahan data atau input pengguna.
+Keuntungan memakai `const` yaitu:
+- **Efisiensi Memori**: Objek yang diberi `const` hanya akan diciptakan sekali dan dapat digunakan berulang kali tanpa alokasi memori ulang.
+- **Peningkatan Performa**: Menghindari pembuatan ulang widget yang sama, sehingga mempercepat proses rendering dan meningkatkan performa.
+- **Konsistensi**: Memastikan nilai tetap konsisten selama aplikasi berjalan.
 
----
-
-### 2. Sebutkan widget apa saja yang kamu gunakan pada proyek ini dan jelaskan fungsinya.
-
-Pada proyek ini, beberapa widget yang digunakan beserta fungsinya adalah:
-
-- **Scaffold**: Memberikan struktur dasar untuk halaman aplikasi, termasuk bagian `appBar`, `body`, dan `bottomNavigationBar`.
-- **AppBar**: Menyediakan bar di bagian atas halaman yang biasanya digunakan untuk judul halaman dan aksi penting.
-- **Column**: Menyusun widget-widget anak secara vertikal.
-- **Row**: Menyusun widget-widget anak secara horizontal. Digunakan untuk menampilkan informasi seperti NPM, Nama, dan Kelas dalam satu baris.
-- **Expanded**: Memperluas widget agar mengisi ruang yang tersedia di dalam `Row` atau `Column`, memastikan elemen-elemen memiliki ukuran yang proporsional.
-- **Text**: Menampilkan teks statis dalam aplikasi, seperti judul, informasi pengguna, dan deskripsi.
-- **ElevatedButton**: Tombol yang menampilkan aksi atau interaksi pengguna, seperti navigasi antar halaman atau menampilkan pesan.
-- **GridView**: Menampilkan item dalam format grid atau tabel. Digunakan untuk menampilkan menu item produk dalam tata letak yang rapi.
-- **Card**: Menampilkan konten dalam bentuk kartu dengan efek bayangan dan sudut melingkar, membuat konten tampak lebih terstruktur.
-- **InkWell**: Memberikan efek klik dengan animasi ripple. Ini menambah interaksi pada setiap item di dalam `GridView`.
+Gunakan `const` pada widget yang tidak akan mengalami perubahan, misalnya Text static, gambar static, atau layout yang tidak berubah. Namun hindari penggunaan `const` pada widget yang mengandung data yang dapat berubah, seperti input pengguna, hasil API, atau Widget yang mengandung state.
 
 ---
 
-### 3. Apa fungsi dari setState()? Jelaskan variabel apa saja yang dapat terdampak dengan fungsi tersebut.
+## 2. Jelaskan dan bandingkan penggunaan Column dan Row pada Flutter. Berikan contoh implementasi dari masing-masing layout widget ini!
+### `Column`
+- **Fungsi**: Menyusun widget secara vertikal (atas ke bawah).
+- **Contoh Implementasi**:
+  ```dart
+  child: Column(
+    mainAxisAlignment: MainAxisAlignment.center,
+    children: [
+      Text(
+        item.count.toString(),
+        style: const TextStyle(
+          color: Colors.white,
+          fontWeight: FontWeight.bold,
+        ),
+      ),
+      Icon(
+        item.icon,
+        color: Colors.white,
+        size: 30.0,
+      ),
+      const SizedBox(height: 8.0),
+      Text(
+        item.name,
+        textAlign: TextAlign.center,
+        style: const TextStyle(color: Colors.white),
+      ),
+    ],
+    ),
+  ```
 
-`setState()` adalah fungsi yang digunakan dalam `StatefulWidget` untuk memperbarui state dari widget tersebut. Ketika `setState()` dipanggil, Flutter akan membangun ulang widget yang dipengaruhi oleh perubahan state, memastikan UI menampilkan data terbaru atau perubahan yang terjadi.
+### `Row`
+- **Fungsi**: Menyusun widget secara horizontal (kiri ke kanan).
+- **Contoh Implementasi**:
+  ```dart
+      Expanded(
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            Expanded(child: InfoCard(title: 'NPM', content: npm)),
+            Expanded(child: InfoCard(title: 'Name', content: name)),
+            Expanded(child: InfoCard(title: 'Class', content: className)),
+          ],
+        ),
+      ),
+  ```
+---
 
-**Contoh variabel yang dapat terdampak dengan `setState()`**:
-- **items**: Jika daftar `ItemHomepage` diubah (misalnya menambah atau menghapus item), kita perlu memanggil `setState()` agar tampilan `GridView` diperbarui dengan daftar terbaru.
-- **npm, name, className**: Jika ada perubahan pada data pengguna (NPM, nama, kelas), `setState()` memungkinkan pembaruan data ini ditampilkan langsung di UI.
+## 3. Sebutkan apa saja elemen input yang kamu gunakan pada halaman form yang kamu buat pada tugas kali ini. Apakah terdapat elemen input Flutter lain yang tidak kamu gunakan pada tugas ini? Jelaskan!
+Pada tugas ini, saya menggunakan salah satu elemen input yaitu `TextField`, ini digunakan untuk menginput beberapa data, misalkan nama produk, toko, dan harga. Ada beberapa elemen input lain yang tidak digunakan dalam tugas ini, misalnya `Checkbox`, `Radio`, `Switch`, `DropdownButton`, dll. Elemen-elemen input ini tidak digunakan karena data yang dinput hanya berupa teks sederhana.
 
-Dengan menggunakan `setState()`, aplikasi akan menyesuaikan tampilan sesuai dengan data terbaru yang ada pada variabel-variabel tersebut.
+---
 
-## Langkah-Langkah Implementasi Checklist
-### Membuat Program Flutter Baru Bertema E-Commerce
-1. **Inisiasi Flutter Project melalui VS Code:**
-   ![image](https://github.com/user-attachments/assets/737a2748-70a3-4444-b440-636550c068dd)
-2. **Membuat Flutter Project dengan nama `skibishop-mobile`.**
-3. **Masuk ke codebase.**
-4. **Membuat `main.dart` sebagai layout utama** dan `menu.dart` untuk menyimpan menu-menu yang akan ditampilkan di halaman utama.
-5. **Menjalankan aplikasi** dengan perintah berikut:
-   ```bash
-   flutter run
-   ```
+## 4. Bagaimana cara kamu mengatur tema (theme) dalam aplikasi Flutter agar aplikasi yang dibuat konsisten? Apakah kamu mengimplementasikan tema pada aplikasi yang kamu buat?
 
-### Membuat Tiga Tombol Sederhana dengan Ikon dan Teks
-1. **Membuat widget `ItemHomepage` dan `ItemCard`** yang akan digunakan secara modular untuk menampilkan tombol.
-   ```dart
-   class ItemHomepage {
-     final String name;
-     final IconData icon;
-     final Color color;
+Untuk menjaga konsistensi aplikasi, tema aplikasi dapat diatur dengan menggunakan `ThemeData` pada widget `MaterialApp`. Dengan ini, kita bisa menentukan tema global untuk aplikasi, seperti warna utama, font, dan elemen lainnya.
 
-     ItemHomepage(this.name, this.icon, this.color);
-   }
-
-   class ItemCard extends StatelessWidget {
-     final ItemHomepage item;
-
-     const ItemCard(this.item, {super.key});
-
-     @override
-     Widget build(BuildContext context) {
-       return Material(
-         color: Theme.of(context).colorScheme.secondary,
-         ...
-       );
-     }
-   }
-   ```
-
-2. **Membuat array `items`:**
-   ```dart
-   final items = [
-     ItemHomepage('Products', Icons.shopping_bag, Colors.blue),
-     ItemHomepage('Add Product', Icons.add, Colors.green),
-     ItemHomepage('Logout', Icons.logout, Colors.red),
-   ];
-   ```
-
-3. **Memanggil komponen `ItemHomePage` di widget utama `HomePage`:**
-   ```dart
-   ...
-   Expanded(
-     flex: 3,
-     child: GridView.count(
-       primary: false,
-       crossAxisSpacing: 10,
-       mainAxisSpacing: 10,
-       crossAxisCount: 2,
-       children: items.map((ItemHomepage item) {
-         return ItemCard(item);
-       }).toList(),
-     ),
-   ),
-   ...
-   ```
-
-### Mengimplementasikan Warna-Warna Berbeda untuk Setiap Tombol (Lihat Daftar Produk, Tambah Produk, dan Logout)
-1. **Inisiasi warna berbeda untuk setiap tombol:**
-   ```dart
-   final items = [
-     ItemHomepage('Products', Icons.shopping_bag, Colors.blue),
-     ItemHomepage('Add Product', Icons.add, Colors.green),
-     ItemHomepage('Logout', Icons.logout, Colors.red),
-   ];
-   ```
-   
-2. **Menggunakan warna pada `ItemCard`:**
-   ```dart
-   ...
-   @override
-   Widget build(BuildContext context) {
-     return Material(
-       color: item.color,
-       ...
-     );
-   }
-   ```
-
-### Menampilkan Snackbar dengan Pesan
-Menambahkan logika `onTap` pada masing-masing `ItemCard` untuk menampilkan pesan snackbar.
-
+### Contoh Implementasi Tema:
 ```dart
-onTap: () {
-  ScaffoldMessenger.of(context)
-    ..hideCurrentSnackBar()
-    ..showSnackBar(SnackBar(
-        content: Text("Kamu telah menekan tombol ${item.name}!")));
-},
+  ...
+  backgroundColor: Theme.of(context).colorScheme.primary,
+  ...
 ```
 
-Pesan snackbar yang muncul akan otomatis mengikuti nama item yang diberikan.
+Ini memastikan bahwa seluruh aplikasi menggunakan tema yang konsisten, dan setiap elemen yang membutuhkan tema akan mengikuti setting ini.
+
+---
+
+## 5. Bagaimana cara kamu menangani navigasi dalam aplikasi dengan banyak halaman pada Flutter?
+
+Navigasi di Flutter dapat dilakukan menggunakan `Navigator`. Untuk berpindah antar halaman, kita bisa menggunakan `Navigator.push()`, dan untuk kembali ke halaman sebelumnya, kita menggunakan `Navigator.pop()`.
+
+### Menggunakan `Navigator.pushReplacement` untuk Pindah ke Halaman Baru:
+```dart
+  onTap: () {
+    Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(
+          builder: (context) => const MyHomePage(),
+        ));
+  },
+```
+
+### Menggunakan `Navigator.pop` untuk Kembali ke Halaman Sebelumnya:
+```dart
+   actions: [
+      TextButton(
+        child: const Text('OK'),
+        onPressed: () {
+          Navigator.pop(context);
+          _formKey.currentState!.reset();
+        },
+      ),
+    ],
+```
+
+Dengan `Navigator`, kita dapat dengan mudah mengelola navigasi antar halaman di aplikasi, baik untuk aplikasi dengan dua halaman atau aplikasi besar dengan banyak layar.
+
+---
