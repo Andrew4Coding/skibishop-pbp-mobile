@@ -12,117 +12,101 @@ E-Commerce Mobile Application for True Sigma
 
 ## 📚 Archive Tugas 
 - [Tugas 7 PBP 2024/2025](https://github.com/Andrew4Coding/skibishop-pbp-mobile/wiki/Tugas-7-PBP-2024-2025)
+- [Tugas 8 PBP 2024/2025](https://github.com/Andrew4Coding/skibishop-pbp-mobile/wiki/Tugas-8-PBP-2024-2025)
 
-# Tugas 8 - PBP 2024/2025
-## 1. Apa kegunaan const di Flutter? Jelaskan apa keuntungan ketika menggunakan const pada kode Flutter. Kapan sebaiknya kita menggunakan const, dan kapan sebaiknya tidak digunakan?
+---
+# Tugas 9 - PBP 2024/2025
+## 1. Mengapa Perlu Membuat Model untuk Pengambilan atau Pengiriman Data JSON?
+Model diperlukan untuk:
+- **Strukturisasi Data:** Membantu memetakan data JSON menjadi objek Dart yang terstruktur, sehingga lebih mudah diakses dan digunakan.
+- **Validasi dan Transformasi:** Memastikan bahwa data yang diterima memiliki format dan tipe yang sesuai.
+- **Pemeliharaan Kode:** Kode menjadi lebih terorganisir karena setiap data memiliki representasi khusus.
 
-`const` di Flutter digunakan untuk mendeklarasikan objek yang nilainya tidak berubah selama aplikasi berjalan. Ketika sebuah widget diberi label `const`, Flutter mengoptimalkan penggunaan memori dan performa, karena objek tersebut akan dibuat hanya sekali dan digunakan kembali.
-
-Keuntungan memakai `const` yaitu:
-- **Efisiensi Memori**: Objek yang diberi `const` hanya akan diciptakan sekali dan dapat digunakan berulang kali tanpa alokasi memori ulang.
-- **Peningkatan Performa**: Menghindari pembuatan ulang widget yang sama, sehingga mempercepat proses rendering dan meningkatkan performa.
-- **Konsistensi**: Memastikan nilai tetap konsisten selama aplikasi berjalan.
-
-Gunakan `const` pada widget yang tidak akan mengalami perubahan, misalnya Text static, gambar static, atau layout yang tidak berubah. Namun hindari penggunaan `const` pada widget yang mengandung data yang dapat berubah, seperti input pengguna, hasil API, atau Widget yang mengandung state.
+**Apakah akan terjadi error jika tidak membuat model?**
+Tidak membuat model tidak selalu menyebabkan error, tetapi:
+- Data JSON harus diproses secara manual, sehingga rentan terhadap kesalahan.
+- Akses ke data menjadi lebih rumit dan rawan kesalahan tipe data.
+- Aplikasi menjadi sulit untuk dikembangkan dan dipelihara.
 
 ---
 
-## 2. Jelaskan dan bandingkan penggunaan Column dan Row pada Flutter. Berikan contoh implementasi dari masing-masing layout widget ini!
-### `Column`
-- **Fungsi**: Menyusun widget secara vertikal (atas ke bawah).
-- **Contoh Implementasi**:
-  ```dart
-  child: Column(
-    mainAxisAlignment: MainAxisAlignment.center,
-    children: [
-      Text(
-        item.count.toString(),
-        style: const TextStyle(
-          color: Colors.white,
-          fontWeight: FontWeight.bold,
-        ),
-      ),
-      Icon(
-        item.icon,
-        color: Colors.white,
-        size: 30.0,
-      ),
-      const SizedBox(height: 8.0),
-      Text(
-        item.name,
-        textAlign: TextAlign.center,
-        style: const TextStyle(color: Colors.white),
-      ),
-    ],
-    ),
-  ```
+## 2. Fungsi Library `http`
+Library `http` digunakan untuk:
+- **Melakukan HTTP Request:** Mengirim request (GET, POST, PUT, DELETE) ke server.
+- **Mengambil Data dari API:** Mendapatkan respons dalam bentuk JSON atau format lain.
+- **Mengirimkan Data ke Server:** Mengirim data dalam format tertentu seperti JSON ke API server.
 
-### `Row`
-- **Fungsi**: Menyusun widget secara horizontal (kiri ke kanan).
-- **Contoh Implementasi**:
-  ```dart
-      Expanded(
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            Expanded(child: InfoCard(title: 'NPM', content: npm)),
-            Expanded(child: InfoCard(title: 'Name', content: name)),
-            Expanded(child: InfoCard(title: 'Class', content: className)),
-          ],
-        ),
-      ),
-  ```
----
-
-## 3. Sebutkan apa saja elemen input yang kamu gunakan pada halaman form yang kamu buat pada tugas kali ini. Apakah terdapat elemen input Flutter lain yang tidak kamu gunakan pada tugas ini? Jelaskan!
-Pada tugas ini, saya menggunakan salah satu elemen input yaitu `TextField`, ini digunakan untuk menginput beberapa data, misalkan nama produk, toko, dan harga. Ada beberapa elemen input lain yang tidak digunakan dalam tugas ini, misalnya `Checkbox`, `Radio`, `Switch`, `DropdownButton`, dll. Elemen-elemen input ini tidak digunakan karena data yang dinput hanya berupa teks sederhana.
+Pada tugas ini, library `http` digunakan untuk mengambil data dari server Django yang berisi informasi produk dalam bentuk JSON.
 
 ---
 
-## 4. Bagaimana cara kamu mengatur tema (theme) dalam aplikasi Flutter agar aplikasi yang dibuat konsisten? Apakah kamu mengimplementasikan tema pada aplikasi yang kamu buat?
+## 3. Fungsi CookieRequest
+`CookieRequest` adalah bagian dari package `pbp_django_auth` yang berfungsi untuk:
+- **Mengelola Otentikasi:** Menyimpan sesi login pengguna melalui cookie.
+- **Menyederhanakan HTTP Request:** Mempermudah proses pengiriman data dengan autentikasi tanpa harus menambahkan header secara manual.
+- **Mendukung Stateful Request:** Mengingat status login pengguna di berbagai request.
 
-Untuk menjaga konsistensi aplikasi, tema aplikasi dapat diatur dengan menggunakan `ThemeData` pada widget `MaterialApp`. Dengan ini, kita bisa menentukan tema global untuk aplikasi, seperti warna utama, font, dan elemen lainnya.
-
-### Contoh Implementasi Tema:
-```dart
-  ...
-  backgroundColor: Theme.of(context).colorScheme.primary,
-  ...
-```
-
-Ini memastikan bahwa seluruh aplikasi menggunakan tema yang konsisten, dan setiap elemen yang membutuhkan tema akan mengikuti setting ini.
+### Mengapa Instance CookieRequest Dibagikan ke Semua Komponen?
+- **Konsistensi Status Login:** Semua komponen membutuhkan informasi status login yang sama.
+- **Menghindari Redundansi:** Instance yang sama memungkinkan pengelolaan session tanpa membuat koneksi baru setiap kali request dilakukan.
+- **Integrasi Data Global:** Mempermudah akses data global seperti token autentikasi dan session pengguna.
 
 ---
 
-## 5. Bagaimana cara kamu menangani navigasi dalam aplikasi dengan banyak halaman pada Flutter?
+## 4. Mekanisme Pengiriman Data dari Input hingga Ditampilkan di Flutter
+1. **Input Data:**
+   Pengguna memasukkan data melalui antarmuka Flutter (misalnya form atau button).
 
-Navigasi di Flutter dapat dilakukan menggunakan `Navigator`. Untuk berpindah antar halaman, kita bisa menggunakan `Navigator.push()`, dan untuk kembali ke halaman sebelumnya, kita menggunakan `Navigator.pop()`.
+2. **Mengirim Request:**
+   Data yang dimasukkan dikirim ke server menggunakan `http` atau `CookieRequest` dalam format tertentu (misalnya JSON).
 
-### Menggunakan `Navigator.pushReplacement` untuk Pindah ke Halaman Baru:
-```dart
-  onTap: () {
-    Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(
-          builder: (context) => const MyHomePage(),
-        ));
-  },
-```
+3. **Proses di Backend:**
+   - Server Django menerima data request.
+   - Backend memproses data (misalnya menyimpan ke database atau melakukan perhitungan).
+   - Django mengembalikan respons dalam bentuk JSON.
 
-### Menggunakan `Navigator.pop` untuk Kembali ke Halaman Sebelumnya:
-```dart
-   actions: [
-      TextButton(
-        child: const Text('OK'),
-        onPressed: () {
-          Navigator.pop(context);
-          _formKey.currentState!.reset();
-        },
-      ),
-    ],
-```
+4. **Menerima Respons:**
+   Aplikasi Flutter menerima respons dari server.
 
-Dengan `Navigator`, kita dapat dengan mudah mengelola navigasi antar halaman di aplikasi, baik untuk aplikasi dengan dua halaman atau aplikasi besar dengan banyak layar.
+5. **Dekoding Data:**
+   Respons JSON dikonversi menjadi objek Dart (menggunakan model).
+
+6. **Menampilkan Data:**
+   Data yang sudah dikonversi ditampilkan dalam antarmuka Flutter.
 
 ---
+
+## 5. Mekanisme Autentikasi Login, Register, dan Logout
+### **Proses Login**
+1. **Input Data:**
+   Pengguna memasukkan email dan password di Flutter.
+2. **Mengirim Request:**
+   Data dikirim ke endpoint login Django menggunakan `CookieRequest`.
+3. **Proses Backend:**
+   - Django memverifikasi kredensial pengguna.
+   - Jika berhasil, server mengembalikan cookie autentikasi.
+4. **Menyimpan Status:**
+   Cookie disimpan di `CookieRequest` untuk digunakan pada request berikutnya.
+5. **Tampilan Menu:**
+   Setelah login berhasil, menu utama aplikasi ditampilkan sesuai dengan status login.
+
+### **Proses Register**
+1. **Input Data:**
+   Pengguna memasukkan informasi akun (misalnya nama, email, password).
+2. **Mengirim Request:**
+   Data dikirim ke endpoint register Django menggunakan `http` atau `CookieRequest`.
+3. **Proses Backend:**
+   - Django menyimpan data pengguna baru ke database.
+   - Django mengembalikan respons keberhasilan.
+4. **Notifikasi:**
+   Flutter menampilkan pesan sukses atau error berdasarkan respons.
+
+### **Proses Logout**
+1. **Request Logout:**
+   Flutter mengirimkan request ke endpoint logout Django menggunakan `CookieRequest`.
+2. **Hapus Cookie:**
+   Django menghapus session pengguna.
+3. **Update Status:**
+   Aplikasi Flutter memperbarui status pengguna menjadi tidak login.
+4. **Navigasi:**
+   Pengguna diarahkan kembali ke halaman login.
