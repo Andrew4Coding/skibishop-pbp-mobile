@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:skibishop_mobile/pages/list_product.dart';
 import 'package:skibishop_mobile/pages/menu.dart';
-import 'package:skibishop_mobile/pages/productEntryFormPage.dart';
+import 'package:skibishop_mobile/pages/product_entry_form.dart';
 
 class LeftDrawer extends StatelessWidget {
   const LeftDrawer({super.key});
@@ -58,6 +59,18 @@ class LeftDrawer extends StatelessWidget {
                   context,
                   MaterialPageRoute(
                     builder: (context) => const ProductEntryFormPage(),
+                  ));
+            },
+          ),
+          ListTile(
+            leading: const Icon(Icons.add),
+            title: const Text('List Product'),
+            // Bagian redirection ke MoodEntryFormPage
+            onTap: () {
+              Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const ProductListPage(),
                   ));
             },
           ),
