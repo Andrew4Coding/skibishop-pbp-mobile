@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pbp_django_auth/pbp_django_auth.dart';
 import 'package:provider/provider.dart';
+import 'package:skibishop_mobile/ds/navbar.dart';
 import 'package:skibishop_mobile/pages/menu.dart';
 import 'package:skibishop_mobile/pages/register.dart';
 
@@ -42,9 +43,7 @@ class _LoginPageState extends State<LoginPage> {
     final request = context.watch<CookieRequest>();
 
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Login'),
-      ),
+      appBar: const Navbar(),
       body: Center(
         child: SingleChildScrollView(
           padding: const EdgeInsets.all(16.0),

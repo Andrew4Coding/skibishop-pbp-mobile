@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:pbp_django_auth/pbp_django_auth.dart';
 import 'package:provider/provider.dart';
 import 'package:skibishop_mobile/ds/left_drawer.dart';
+import 'package:skibishop_mobile/ds/navbar.dart';
 import 'package:skibishop_mobile/models/product_entry.dart';
 
 class ProductListPage extends StatefulWidget {
@@ -32,9 +33,7 @@ class _ProductListPageState extends State<ProductListPage> {
   Widget build(BuildContext context) {
     final request = context.watch<CookieRequest>();
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Mood Entry List'),
-      ),
+      appBar: const Navbar(),
       drawer: const LeftDrawer(),
       body: FutureBuilder(
         future: fetchMood(request),
