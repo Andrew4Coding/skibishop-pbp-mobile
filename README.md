@@ -156,9 +156,34 @@ Instance CookieRequest perlu dibagikan agar data pengguna yang login akan telah 
 2. Membuat stateful page pada umumnya
 3. Membuat form yang berisi username dan password
 4. Membuat logic button login
-5. 
-6. 
+   ```dart
+   ...
+      ElevatedButton(
+        onPressed: () async {
+          String username = _usernameController.text;
+          String password = _passwordController.text;
+   
+          final response = await request
+              .login("http://localhost:8000/auth/login/", {
+            'username': username,
+            'password': password,
+          });
+   ...
+   // Mengarahkan penggnua ke home page jika sudah login
+   if (context.mounted) {
+     Navigator.pushReplacement(
+       context,
+       MaterialPageRoute(
+           builder: (context) => const MyHomePage()),
+     );
+   ...
+   ```
+
 ### Mengintegrasikan sistem autentikasi Django dengan proyek tugas Flutter.
+1. Membuat view login, logout, dan registrasi
+2. Memanggil endpoints melalui request di Flutter
+3. Memproses output JSON
+4. 
 ### Membuat model kustom sesuai dengan proyek aplikasi Django.
 1. Mengecek konten dari `localhost:8000/json`
 2. Menggenerate model dart dengan bantuan website Quicktype
