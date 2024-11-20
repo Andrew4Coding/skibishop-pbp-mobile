@@ -183,7 +183,7 @@ Instance CookieRequest perlu dibagikan agar data pengguna yang login akan telah 
 1. Membuat view login, logout, dan registrasi
 2. Memanggil endpoints melalui request di Flutter
 3. Memproses output JSON
-4. 
+
 ### Membuat model kustom sesuai dengan proyek aplikasi Django.
 1. Mengecek konten dari `localhost:8000/json`
 2. Menggenerate model dart dengan bantuan website Quicktype
